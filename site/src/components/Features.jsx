@@ -90,7 +90,7 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
               }}
             />
             <TiLocationArrow className="relative z-20" />
-            <p className="relative z-20">coming soon</p>
+            <p className="relative z-20">DIVE</p>
           </div>
         )}
       </div>
@@ -113,78 +113,77 @@ const Features = () => (
       </div>
 
       <BentoTilt className="border-hsla relative mb-7 h-96 w-full overflow-hidden rounded-md md:h-[65vh]">
-        <BentoCard
-          src="videos/feature-1.mp4"
-          title={
-            <>
-              radia<b>n</b>t
-            </>
-          }
-          description="A cross-platform metagame app, turning your activities across Web2 and Web3 games into a rewarding adventure."
-          isComingSoon
-        />
-      </BentoTilt>
+  <BentoCard
+    src="videos/feature-1.mp4"
+    title={
+      <>
+        h<b>e</b>ritage
+      </>
+    }
+    description="Exploring the richness of cultural traditions, passed down through generations."
+    isComingSoon
+  />
+</BentoTilt>
 
-      <div className="grid h-[135vh] w-full grid-cols-2 grid-rows-3 gap-7">
-        <BentoTilt className="bento-tilt_1 row-span-1 md:col-span-1 md:row-span-2">
-          <BentoCard
-            src="videos/feature-2.mp4"
-            title={
-              <>
-                zig<b>m</b>a
-              </>
-            }
-            description="An anime and gaming-inspired NFT collection - the IP primed for expansion."
-            isComingSoon
-          />
-        </BentoTilt>
+<div className="grid h-[135vh] w-full grid-cols-2 grid-rows-3 gap-7">
+  <BentoTilt className="bento-tilt_1 row-span-1 md:col-span-1 md:row-span-2">
+    <BentoCard
+      src="videos/feature-2.mp4"
+      title={
+        <>
+          ar<b>t</b>istry
+        </>
+      }
+      description="Celebrating the creativity of cultural artisans, blending tradition with modernity."
+      isComingSoon
+    />
+  </BentoTilt>
 
-        <BentoTilt className="bento-tilt_1 row-span-1 ms-32 md:col-span-1 md:ms-0">
-          <BentoCard
-            src="videos/feature-3.mp4"
-            title={
-              <>
-                n<b>e</b>xus
-              </>
-            }
-            description="A gamified social hub, adding a new dimension of play to social interaction for Web3 communities."
-            isComingSoon
-          />
-        </BentoTilt>
+  <BentoTilt className="bento-tilt_1 row-span-1 ms-32 md:col-span-1 md:ms-0">
+    <BentoCard
+      src="videos/feature-3.mp4"
+      title={
+        <>
+          s<b>y</b>mphony
+        </>
+      }
+      description="Harmony of music and dance, reflecting the diversity of cultural expressions."
+      isComingSoon
+    />
+  </BentoTilt>
 
-        <BentoTilt className="bento-tilt_1 me-14 md:col-span-1 md:me-0">
-          <BentoCard
-            src="videos/feature-4.mp4"
-            title={
-              <>
-                az<b>u</b>l
-              </>
-            }
-            description="A cross-world AI Agent - elevating your gameplay to be more fun and productive."
-            isComingSoon
-          />
-        </BentoTilt>
+  <BentoTilt className="bento-tilt_1 me-14 md:col-span-1 md:me-0">
+    <BentoCard
+      src="videos/feature-4.mp4"
+      title={
+        <>
+          l<b>e</b>ge<b>n</b>ds
+        </>
+      }
+      description="Stories and folklore that connect the past with the present, preserving cultural legacy."
+      isComingSoon
+    />
+  </BentoTilt>
 
-        <BentoTilt className="bento-tilt_2">
-          <div className="flex size-full flex-col justify-between bg-violet-300 p-5">
-            <h1 className="bento-title special-font max-w-64 text-black">
-              M<b>o</b>re co<b>m</b>ing s<b>o</b>on.
-            </h1>
+  <BentoTilt className="bento-tilt_2">
+    <div className="flex size-full flex-col justify-between bg-violet-300 p-5">
+      <h1 className="bento-title special-font max-w-64 text-black">
+        M<b>o</b>re c<b>u</b>ltural st<b>o</b>ries s<b>o</b>on.
+      </h1>
+      <TiLocationArrow className="m-5 scale-[5] self-end" />
+    </div>
+  </BentoTilt>
 
-            <TiLocationArrow className="m-5 scale-[5] self-end" />
-          </div>
-        </BentoTilt>
-
-        <BentoTilt className="bento-tilt_2">
-          <video
-            src="videos/feature-5.mp4"
-            loop
-            muted
-            autoPlay
-            className="size-full object-cover object-center"
-          />
-        </BentoTilt>
-      </div>
+  <BentoTilt className="bento-tilt_2">
+    <video
+      src="videos/feature-5.mp4"
+      loop
+      muted
+      autoPlay
+      className="size-full object-cover object-center"
+    />
+  </BentoTilt>
+</div>
     </div>
   </section>
 );
