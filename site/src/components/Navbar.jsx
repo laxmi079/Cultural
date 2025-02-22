@@ -2,23 +2,27 @@ import clsx from "clsx";
 import gsap from "gsap";
 import { useWindowScroll } from "react-use";
 import { useEffect, useRef, useState } from "react";
-import { TiLocationArrow } from "react-icons/ti";
 import { Link } from 'react-router-dom';
+import { HiMenu, HiX } from 'react-icons/hi';
 
 import Button from "./Button";
 
 const NavBar = () => {
-  // State for toggling audio and visual indicator
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [isIndicatorActive, setIsIndicatorActive] = useState(false);
 
-  // Refs for audio and navigation container
   const audioElementRef = useRef(null);
   const navContainerRef = useRef(null);
 
   const { y: currentScrollY } = useWindowScroll();
   const [isNavVisible, setIsNavVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+
+  // Toggle menu
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   // Toggle audio and visual indicator
   const toggleAudioIndicator = () => {
@@ -68,29 +72,28 @@ const NavBar = () => {
     >
       <header className="absolute top-1/2 w-full -translate-y-1/2">
         <nav className="flex size-full items-center justify-between p-4">
-          {/* Logo and Product button */}
+          {/* Logo */}
           <div className="flex items-center gap-7">
             <img src="/img/logo.png" alt="logo" className="w-10" />
-
-           
           </div>
 
           {/* Navigation Links and Audio Button */}
           <div className="flex h-full items-center">
+            {/* Desktop Menu */}
             <div className="hidden md:block">
               <ul className="flex items-center space-x-6">
                 <li><Link to="/" className="nav-hover-btn text-gray-700 hover:text-gray-900">Home</Link></li>
                 <li><Link to="/about" className="nav-hover-btn text-gray-700 hover:text-gray-900">About</Link></li>
                 <li><Link to="/gallery" className="nav-hover-btn text-gray-700 hover:text-gray-900">Gallery</Link></li>
-                <li><Link to="/clubs" className="nav-hover-btn text-gray-700 hover:text-gray-900">Clubs</Link></li>
-                <li><Link to="/teams" className="nav-hover-btn text-gray-700 hover:text-gray-900">Teams</Link></li>
+                <li><Link to="/events" className="nav-hover-btn text-gray-700 hover:text-gray-900">Events</Link></li>
                 <li><Link to="/contact" className="nav-hover-btn text-gray-700 hover:text-gray-900">Contact</Link></li>
               </ul>
             </div>
 
+            {/* Audio Button */}
             <button
               onClick={toggleAudioIndicator}
-              className="ml-10 flex items-center space-x-0.5"
+              className="ml-6 flex items-center space-x-0.5"
             >
               <audio
                 ref={audioElementRef}
@@ -110,8 +113,57 @@ const NavBar = () => {
                 />
               ))}
             </button>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={toggleMenu}
+              className="ml-4 p-2 md:hidden text-gray-700 hover:text-gray-900"
+            >
+              {isMenuOpen ? <HiX size={24} /> : <HiMenu size={24} />}
+            </button>
           </div>
         </nav>
+
+        {/* Mobile Menu */}
+        <div
+          className={clsx(
+            "fixed top-[4.5rem] left-0 right-0 z-50 bg-white/80 backdrop-blur-sm transition-all duration-300 ease-in-out md:hidden",
+            {
+              "translate-y-0 opacity-100 visible": isMenuOpen,
+              "-translate-y-full opacity-0 invisible": !isMenuOpen
+            }
+          )}
+        >
+          <div className="py-6">
+            <ul className="flex flex-col items-center space-y-6 text-lg">
+              <li><Link 
+                to="/" 
+                className="text-gray-700 hover:text-gray-900 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >Home</Link></li>
+              <li><Link 
+                to="/about" 
+                className="text-gray-700 hover:text-gray-900 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >About</Link></li>
+              <li><Link 
+                to="/gallery" 
+                className="text-gray-700 hover:text-gray-900 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >Gallery</Link></li>
+              <li><Link 
+                to="/events" 
+                className="text-gray-700 hover:text-gray-900 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >Events</Link></li>
+              <li><Link 
+                to="/contact" 
+                className="text-gray-700 hover:text-gray-900 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >Contact</Link></li>
+            </ul>
+          </div>
+        </div>
       </header>
     </div>
   );
