@@ -6,6 +6,7 @@ import Features from "./components/Features";
 import Story from "./components/Story";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import GalleryApp from "./components/GalleryApp";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
             </>
           } />
           <Route path="/about" element={<About />} />
-          <Route path="/gallery" element={<div>Gallery Page</div>} />
+          <Route path="/gallery" element={<GalleryApp />} />
           <Route path="/clubs" element={<div>Clubs Page</div>} />
           <Route path="/teams" element={<div>Teams Page</div>} />
           <Route path="/contact" element={<Contact />} />
