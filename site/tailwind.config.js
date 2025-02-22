@@ -32,6 +32,7 @@ export default {
         'glow': 'glow 2s ease-in-out infinite alternate',
         'sparkle': 'sparkle 4s ease-in-out infinite',
         'rotate-slow': 'rotate 15s linear infinite',
+        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
         'reverse-spin': {
@@ -42,13 +43,13 @@ export default {
             transform: 'rotate(0deg)'
           },
         },
-        'glow': {
-          from: {
-            opacity: '0.4',
+        glow: {
+          '0%': {
+            opacity: 0.4,
             transform: 'scale(0.8)'
           },
-          to: {
-            opacity: '0.8',
+          '100%': {
+            opacity: 0.8,
             transform: 'scale(1.1)'
           },
         },
