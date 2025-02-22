@@ -26,6 +26,50 @@ export default {
           300: "#edff66",
         },
       },
+      animation: {
+        'spin-slow': 'spin 8s linear infinite',
+        'reverse-spin': 'reverse-spin 12s linear infinite',
+        'glow': 'glow 2s ease-in-out infinite alternate',
+        'sparkle': 'sparkle 4s ease-in-out infinite',
+        'rotate-slow': 'rotate 15s linear infinite',
+      },
+      keyframes: {
+        'reverse-spin': {
+          from: {
+            transform: 'rotate(360deg)'
+          },
+          to: {
+            transform: 'rotate(0deg)'
+          },
+        },
+        'glow': {
+          from: {
+            opacity: '0.4',
+            transform: 'scale(0.8)'
+          },
+          to: {
+            opacity: '0.8',
+            transform: 'scale(1.1)'
+          },
+        },
+        'sparkle': {
+          '0%, 100%': {
+            transform: 'scale(1)',
+            opacity: 0.5,
+          },
+          '50%': {
+            transform: 'scale(1.2)',
+            opacity: 0.8,
+          }
+        },
+        rotate: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' }
+        },
+      },
+      spacing: {
+        18: '4.5rem', // 72px - for medium size circles
+      },
     },
   },
   plugins: [],
