@@ -2,7 +2,7 @@ import React from 'react'
 import TechTeamDisplay from '../techTeam'
 import VideoTeamDisplay from '../videoTeam'
 import DesignTeamDisplay from '../designTeam'
-import SeniorTeamDisplay from '../HelmTeam'
+import SeniorTeamDisplay from '../helmTeam' 
 import Tracing from '../tracing'
 
 const Team = () => {
