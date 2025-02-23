@@ -1,6 +1,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { FaEnvelope, FaMapMarkerAlt, FaPhone, FaInstagram, FaYoutube, FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
+import React from 'react';
 
 const socialLinks = [
   { 
@@ -93,35 +94,35 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen w-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
-      <div className="relative px-3 sm:px-4 md:px-8 min-h-[calc(100vh-4rem)] flex items-center">
-        <div className="max-w-6xl mx-auto w-full py-12 sm:py-16 md:py-20">
-          {/* Contact Info Section - Now full width */}
-          <div className="space-y-6 max-w-4xl mx-auto"> {/* Adjusted max-width and centered */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center
+      <div className="relative px-4 sm:px-6 lg:px-8 min-h-[calc(100vh-4rem)] flex items-center">
+        <div className="max-w-6xl mx-auto w-full py-8 sm:py-12 lg:py-20">
+          {/* Contact Info Section */}
+          <div className="space-y-4 sm:space-y-6 max-w-4xl mx-auto">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center
               bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
               Get in Touch
             </h1>
-            <p className="text-base sm:text-lg text-blue-100/80 leading-relaxed text-center">
+            <p className="text-sm sm:text-base md:text-lg text-blue-100/80 leading-relaxed text-center px-4">
               Have questions about our cultural activities? We'd love to hear from you!
             </p>
             
-            {/* Contact Details - Now in a grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12"> {/* Changed to 3-column grid */}
+            {/* Contact Details Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12 px-4">
               {/* Email Card */}
-              <div className="contact-card group p-8 rounded-2xl bg-gray-800/50 border border-cyan-500/20
+              <div className="contact-card group p-6 sm:p-8 rounded-2xl bg-gray-800/50 border border-cyan-500/20
                 hover:border-cyan-500/50 shadow-lg hover:shadow-cyan-500/20 
                 transition-all duration-500 hover:-translate-y-2 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-transparent to-cyan-500/10 
                   opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
                 <FaEnvelope className="text-4xl text-cyan-400 mb-4 group-hover:scale-110 transition-transform duration-300" />
-                <h3 className="text-xl font-bold text-cyan-400 mb-4">Official Contacts</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-cyan-400 mb-4">Official Contacts</h3>
                 <div className="space-y-2">
                   <a href="mailto:cultural.council@iitbhu.ac.in" 
-                    className="block text-blue-100/80 hover:text-cyan-400 transition-colors">
+                    className="block text-sm sm:text-base text-blue-100/80 hover:text-cyan-400 transition-colors break-words">
                     cultural.council@iitbhu.ac.in
                   </a>
                   <a href="mailto:gensec.cultural@iitbhu.ac.in"
-                    className="block text-blue-100/80 hover:text-cyan-400 transition-colors">
+                    className="block text-sm sm:text-base text-blue-100/80 hover:text-cyan-400 transition-colors break-words">
                     gensec.cultural@iitbhu.ac.in
                   </a>
                   <p className="text-blue-100/60 text-sm mt-2">
@@ -131,14 +132,14 @@ const Contact = () => {
               </div>
 
               {/* Visit Us Card */}
-              <div className="contact-card group p-8 rounded-2xl bg-gray-800/50 border border-purple-500/20
+              <div className="contact-card group p-6 sm:p-8 rounded-2xl bg-gray-800/50 border border-purple-500/20
                 hover:border-purple-500/50 shadow-lg hover:shadow-purple-500/20 
                 transition-all duration-500 hover:-translate-y-2 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-transparent to-purple-500/10 
                   opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
                 <FaMapMarkerAlt className="text-4xl text-purple-400 mb-4 group-hover:scale-110 transition-transform duration-300" />
-                <h3 className="text-xl font-bold text-purple-400 mb-4">Visit Us</h3>
-                <div className="space-y-2">
+                <h3 className="text-lg sm:text-xl font-bold text-purple-400 mb-4">Visit Us</h3>
+                <div className="space-y-2 text-sm sm:text-base">
                   <p className="block text-blue-100/80">
                     Cultural Council Office<br />
                     Gymkhana Building<br />
@@ -156,13 +157,13 @@ const Contact = () => {
               </div>
 
               {/* Connect With Us Card */}
-              <div className="contact-card group p-8 rounded-2xl bg-gray-800/50 border border-blue-500/20
+              <div className="contact-card group p-6 sm:p-8 rounded-2xl bg-gray-800/50 border border-blue-500/20
                 hover:border-blue-500/50 shadow-lg hover:shadow-blue-500/20 
                 transition-all duration-500 hover:-translate-y-2 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-transparent to-blue-500/10 
                   opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
                 <FaPhone className="text-4xl text-blue-400 mb-4 group-hover:scale-110 transition-transform duration-300" />
-                <h3 className="text-xl font-bold text-blue-400 mb-4">Connect With Us</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-blue-400 mb-4">Connect With Us</h3>
                 <div className="space-y-2">
                   {socialLinks.map((link, index) => (
                     <a 
@@ -170,10 +171,10 @@ const Contact = () => {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block text-blue-100/80 hover:text-blue-400 transition-colors"
+                      className="block text-sm sm:text-base text-blue-100/80 hover:text-blue-400 transition-colors"
                     >
-                      <div className="flex items-center gap-3">
-                        {link.icon}
+                      <div className="flex items-center gap-2 sm:gap-3">
+                        {React.cloneElement(link.icon, { size: 20 })}
                         <span>{link.label}</span>
                       </div>
                     </a>
