@@ -13,7 +13,7 @@ function cn(...inputs) {
   return inputs.filter(Boolean).join(' ');
 }
 
-export function Aavran() {
+const Aavran = () => {
   return (
     <>  
     <LampContainer>
@@ -54,7 +54,7 @@ export function Aavran() {
       />
     </>
   );
-}
+};
 
 export const LampContainer = ({ children, className }) => {
   return (

@@ -7,6 +7,7 @@ import Story from "./components/Story";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import GalleryApp from "./components/GalleryApp";
+import Events from "./components/events/events";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/clubs" element={<div>Clubs Page</div>} />
           <Route path="/teams" element={<div>Teams Page</div>} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/events" element={<Events />} />
         </Routes>
         <Footer />
       </main>
