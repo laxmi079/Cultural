@@ -21,14 +21,14 @@ const Clubs = () => {
   const navigate = useNavigate();
 
   const clubNames = [
-    { label: 'IMC', fullForm: 'Indian Music Club', href: '/clubs/imc' },
-    { label: 'WMC', fullForm: 'Western Music Club', href: '/clubs/wmc' },
-    { label: 'DFZ', fullForm: 'Dance CLub', href: '/clubs/dfz' },
-    { label: 'FAC', fullForm: 'Fine Arts Club', href: '/clubs/fac' },
-    { label: 'AVRN', fullForm: 'Aavran', href: '/clubs/aavran' },
-    { label: 'LIT', fullForm: 'Literary Club', href: '/clubs/lit' },
-    { label: 'QUIZ', fullForm: 'Quiz Club', href: '/clubs/quiz' },
-    { label: 'MASQ', fullForm: 'Theatre Club', href: '/clubs/masq' },
+    { label: 'IMC', fullForm: 'Indian Music Club', href: './imc' },
+    { label: 'WMC', fullForm: 'Western Music Club', href: './wmc' },
+    { label: 'DFZ', fullForm: 'Dance CLub', href: './dfz' },
+    { label: 'FAC', fullForm: 'Fine Arts Club', href: './fac' },
+    { label: 'AVRN', fullForm: 'Aavran', href: './aavran' },
+    { label: 'LIT', fullForm: 'Literary Club', href: './lit' },
+    { label: 'QUIZ', fullForm: 'Quiz Club', href: './quiz' },
+    { label: 'MASQ', fullForm: 'Theatre Club', href: './masq' },
   ];
 
   const images = [
