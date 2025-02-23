@@ -8,6 +8,7 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import GalleryApp from "./components/GalleryApp";
 import Events from "./components/events/events";
+import Teams from "./components/teams/Teams";
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/gallery" element={<GalleryApp />} />
           <Route path="/clubs" element={<div>Clubs Page</div>} />
-          <Route path="/teams" element={<div>Teams Page</div>} />
+          <Route path="/teams" element={<Teams />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/events" element={<Events />} />
         </Routes>
