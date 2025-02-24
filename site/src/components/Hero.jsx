@@ -1,243 +1,148 @@
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/all";
-import { TiLocationArrow } from "react-icons/ti";
-import { useEffect, useRef, useState } from "react";
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import Button from "./Button";
-import VideoPreview from "./VideoPreview";
-
-gsap.registerPlugin(ScrollTrigger);
-
 const Hero = () => {
-  const [currentIndex, setCurrentIndex] = useState(1);
-  const [hasClicked, setHasClicked] = useState(false);
-
-  const [loading, setLoading] = useState(true);
-  const [loadedVideos, setLoadedVideos] = useState(0);
-
-  const totalVideos = 4;
-  const nextVdRef = useRef(null);
-
-  const handleVideoLoad = () => {
-    setLoadedVideos((prev) => prev + 1);
-  };
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  const images = [
+    '/img/circleimg.jpg',
+    '/img/cultural.jpg',
+    '/img/dance.jpg',
+    '/img/music.jpg'
+  ];
 
   useEffect(() => {
-    if (loadedVideos === totalVideos - 1) {
-      setLoading(false);
-    }
-  }, [loadedVideos]);
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    }, 5000);
 
-  const handleMiniVdClick = () => {
-    setHasClicked(true);
-
-    setCurrentIndex((prevIndex) => (prevIndex % totalVideos) + 1);
-  };
-
-  useGSAP(
-    () => {
-      if (hasClicked) {
-        gsap.set("#next-video", { visibility: "visible" });
-        gsap.to("#next-video", {
-          transformOrigin: "center center",
-          scale: 1,
-          width: "100%",
-          height: "100%",
-          duration: 1,
-          ease: "power1.inOut",
-          onStart: () => nextVdRef.current.play(),
-        });
-        gsap.from("#current-video", {
-          transformOrigin: "center center",
-          scale: 0,
-          duration: 1.5,
-          ease: "power1.inOut",
-        });
-      }
-    },
-    {
-      dependencies: [currentIndex],
-      revertOnUpdate: true,
-    }
-  );
-
-  useGSAP(() => {
-    gsap.set("#video-frame", {
-      clipPath: "polygon(14% 0, 72% 0, 88% 90%, 0 95%)",
-      borderRadius: "0% 0% 40% 10%",
-    });
-    gsap.from("#video-frame", {
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-      borderRadius: "0% 0% 0% 0%",
-      ease: "power1.inOut",
-      scrollTrigger: {
-        trigger: "#video-frame",
-        start: "center center",
-        end: "bottom center",
-        scrub: true,
-      },
-    });
-  });
-
-  const getVideoSrc = (index) => `videos/hero-${index}.mp4`;
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="relative h-dvh w-screen overflow-x-hidden">
-      {loading && (
-        <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
-          {/* https://uiverse.io/G4b413l/tidy-walrus-92 */}
-          <div className="three-body">
-            <div className="three-body__dot"></div>
-            <div className="three-body__dot"></div>
-            <div className="three-body__dot"></div>
-          </div>
-        </div>
-      )}
-
-      <div
-        id="video-frame"
-        className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75"
+    <div className="relative min-h-screen w-full overflow-hidden bg-slate-950">
+      {/* Background Image Carousel */}
+      <motion.div 
+        className="absolute inset-0 z-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
       >
-        <div>
-          <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
-            <VideoPreview>
-              <div
-                onClick={handleMiniVdClick}
-                className="origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
+        {images.map((img, index) => (
+          <motion.div
+            key={img}
+            className="absolute inset-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: index === currentImageIndex ? 1 : 0 }}
+            transition={{ duration: 1 }}
+          >
+            <img
+              src={img}
+              alt="Cultural background"
+              className="h-full w-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/80" />
+          </motion.div>
+        ))}
+      </motion.div>
+
+      {/* Content */}
+      <div className="relative z-10 flex min-h-screen items-center px-6 sm:px-10 lg:px-20">
+        <div className="w-full max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="space-y-8"
+          >
+            {/* Main Title */}
+            <h1 className="font-bold text-6xl sm:text-7xl md:text-8xl lg:text-9xl">
+              <span className="block bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent">
+                Cultural Council
+              </span>
+              <span className="mt-2 block bg-gradient-to-r from-yellow-300 via-yellow-200 to-yellow-100 bg-clip-text text-transparent">
+                IIT BHU
+              </span>
+            </h1>
+
+            {/* Subtitle */}
+            <motion.p 
+              className="max-w-2xl text-lg sm:text-xl md:text-2xl text-slate-300 font-light"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.8 }}
+            >
+              Where tradition meets innovation, creating a vibrant tapestry of art, music, and dance.
+            </motion.p>
+
+            {/* Navigation Buttons */}
+            <motion.div 
+              className="flex flex-wrap gap-6 pt-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 1.1 }}
+            >
+              <Link 
+                to="/clubs"
+                className="group relative overflow-hidden rounded-full bg-white/10 px-8 py-3 backdrop-blur-sm
+                  transition-all duration-300 hover:bg-white/20"
               >
-                <video
-                  ref={nextVdRef}
-                  src={getVideoSrc((currentIndex % totalVideos) + 1)}
-                  loop
-                  muted
-                  id="current-video"
-                  className="size-64 origin-center scale-150 object-cover object-center"
-                  onLoadedData={handleVideoLoad}
-                />
-              </div>
-            </VideoPreview>
-          </div>
+                <span className="relative z-10 text-lg font-medium text-white">
+                  Explore Clubs
+                </span>
+                <div className="absolute inset-0 -z-10 bg-gradient-to-r from-yellow-300/0 via-yellow-300/30 to-yellow-300/0 
+                  opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              </Link>
 
-          <video
-            ref={nextVdRef}
-            src={getVideoSrc(currentIndex)}
-            loop
-            muted
-            id="next-video"
-            className="absolute-center invisible absolute z-20 size-64 object-cover object-center"
-            onLoadedData={handleVideoLoad}
-          />
-          <video
-            src={getVideoSrc(
-              currentIndex === totalVideos - 1 ? 1 : currentIndex
-            )}
-            autoPlay
-            loop
-            muted
-            className="absolute left-0 top-0 size-full object-cover object-center"
-            onLoadedData={handleVideoLoad}
-          />
-        </div>
-
-        <div className="absolute left-0 top-0 z-40 size-full">
-          <div className="mt-24 px-5 sm:px-10">
-            <div className="space-y-6">
-              <h1 className="special-font text-7xl md:text-8xl lg:text-9xl font-bold text-blue-100 transition-all duration-500 hover:text-yellow-300">
-                Where Tradition
-              </h1>
-              <h1 className="special-font text-7xl md:text-8xl lg:text-9xl font-bold text-blue-100 transition-all duration-500 hover:text-yellow-300">
-                Meets Innovation
-              </h1>
-              <div className="h-1.5 w-48 bg-yellow-300"></div>
-              <p className="font-robert-regular text-2xl md:text-3xl text-blue-100 opacity-90">
-                Welcome to the Cultural Hub of IIT BHU!
-              </p>
-            </div>
-          </div>
+              <Link 
+                to="/teams"
+                className="group relative overflow-hidden rounded-full bg-white/10 px-8 py-3 backdrop-blur-sm
+                  transition-all duration-300 hover:bg-white/20"
+              >
+                <span className="relative z-10 text-lg font-medium text-white">
+                  Meet the Team
+                </span>
+                <div className="absolute inset-0 -z-10 bg-gradient-to-r from-yellow-300/0 via-yellow-300/30 to-yellow-300/0 
+                  opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
 
-      <div className="absolute bottom-6 sm:bottom-8 md:bottom-10 right-4 sm:right-6 md:right-10 z-50 flex flex-col gap-4 sm:gap-5 md:gap-6">
-        {/* Clubs Circle */}
-        <Link 
-          to="/clubs" 
-          className="group relative flex h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 items-center justify-center hover:scale-105 transition-transform duration-300"
-        >
-          {/* Rotating container */}
-          <div className="absolute inset-0 animate-rotate-slow">
-            {/* Background with minimal overlay */}
-            <div className="absolute inset-0 rounded-full overflow-hidden">
-              <img 
-                src="/img/circleimg.jpg" 
-                alt="sparkle background" 
-                className="w-full h-full object-cover"
-              />
-              {/* Lighter overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-300/10 to-transparent"></div>
-            </div>
-
-            {/* Subtle glass effect */}
-            <div className="absolute inset-0 rounded-full bg-white/5 backdrop-blur-[1px]"></div>
-
-            {/* Sparkle effect */}
-            <div className="absolute inset-0 animate-sparkle">
-              <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.4)_0%,transparent_70%)] animate-pulse"></div>
-            </div>
-
-            {/* Single solid border */}
-            <div className="absolute inset-0 rounded-full border border-white/30"></div>
-
-            {/* Subtle glow */}
-            <div className="absolute inset-0 animate-glow rounded-full bg-blue-100/10 blur-sm"></div>
-          </div>
-
-          {/* Text (outside rotation container to stay upright) */}
-          <span className="z-10 text-sm sm:text-base md:text-lg font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-            Clubs
-          </span>
-        </Link>
-
-        {/* Team Circle */}
-        <Link 
-          to="/teams" 
-          className="group relative flex h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 items-center justify-center hover:scale-105 transition-transform duration-300"
-        >
-          {/* Rotating container */}
-          <div className="absolute inset-0 animate-rotate-slow">
-            {/* Background with minimal overlay */}
-            <div className="absolute inset-0 rounded-full overflow-hidden">
-              <img 
-                src="/img/circleimg.jpg" 
-                alt="sparkle background" 
-                className="w-full h-full object-cover"
-              />
-              {/* Lighter overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-300/10 to-transparent"></div>
-            </div>
-
-            {/* Subtle glass effect */}
-            <div className="absolute inset-0 rounded-full bg-white/5 backdrop-blur-[1px]"></div>
-
-            {/* Sparkle effect */}
-            <div className="absolute inset-0 animate-sparkle">
-              <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.4)_0%,transparent_70%)] animate-pulse"></div>
-            </div>
-
-            {/* Single solid border */}
-            <div className="absolute inset-0 rounded-full border border-white/30"></div>
-
-            {/* Subtle glow */}
-            <div className="absolute inset-0 animate-glow rounded-full bg-blue-100/10 blur-sm"></div>
-          </div>
-
-          {/* Text (outside rotation container to stay upright) */}
-          <span className="z-10 text-sm sm:text-base md:text-lg font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-            Team
-          </span>
-        </Link>
-      </div>
+      {/* Decorative Elements */}
+      <motion.div 
+        className="absolute bottom-0 left-0 right-0 z-20 h-32 bg-gradient-to-t from-slate-950 to-transparent"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.4 }}
+      />
+      
+      {/* Scroll Indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 z-30 -translate-x-1/2"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 1.7 }}
+      >
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-sm text-slate-400">Scroll to explore</span>
+          <motion.div
+            className="h-12 w-0.5 bg-gradient-to-b from-yellow-300 to-transparent"
+            animate={{ 
+              scaleY: [1, 1.5, 1],
+              opacity: [1, 0.5, 1]
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+        </div>
+      </motion.div>
     </div>
   );
 };
