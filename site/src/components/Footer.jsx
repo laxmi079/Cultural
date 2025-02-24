@@ -7,19 +7,19 @@ gsap.registerPlugin(ScrollTrigger);
 
 const socialLinks = [
   { 
-    href: "https://instagram.com", 
+    href: "https://www.instagram.com/cultural.iitbhu/", 
     icon: <FaInstagram size={20} />,
     label: "Instagram",
     color: "from-pink-500 to-purple-500"
   },
   { 
-    href: "https://youtube.com", 
+    href: "https://www.youtube.com/@culturalcouncilgymkhanaiit8042", 
     icon: <FaYoutube size={20} />,
     label: "YouTube",
     color: "from-red-500 to-pink-500"
   },
   { 
-    href: "https://facebook.com", 
+    href: "https://www.facebook.com/search/top?q=cultural%20council%2C%20iit%20bhu%20varanasi", 
     icon: <FaFacebookF size={20} />,
     label: "Facebook",
     color: "from-blue-500 to-cyan-500"
