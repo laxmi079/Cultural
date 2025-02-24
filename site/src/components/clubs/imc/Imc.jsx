@@ -3,13 +3,9 @@ import { motion } from 'framer-motion';
 import Carousel from './eventsImc';
 import ImcHelm from './imcHelm';
 import ImcMedalShowcase from './awardsImc';
-// import { FloatingBackground, musicNotePath } from './musicBg';
-// import { Music, Star, Heart } from 'lucide-react';
-import { Headphones } from 'lucide-react';
-import FloatingMusicIcons from './bgImc';
 import { GiFlute } from "react-icons/gi";
+import FloatingMusicIcons from './bgImc';
 
-// Utility function for class merging (if not already imported)
 function cn(...inputs) {
   return inputs.filter(Boolean).join(' ');
 }
@@ -19,14 +15,14 @@ export function Imc() {
     <>  
       <LampContainer>
         <motion.div
-          initial={{ opacity: 0, y: 100 }}
+          initial={{ opacity: 0.5, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{
             delay: 0.3,
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className="text-center relative z-10"
+          className="text-center"
         >
           <motion.h1 
             className="mt-8 mb-4 bg-gradient-to-br from-cyan-300 via-cyan-400 to-cyan-500 py-6 bg-clip-text text-4xl font-bold tracking-tight text-transparent md:text-7xl lg:text-8xl"
@@ -68,10 +64,10 @@ export function Imc() {
         <ImcHelm />
         <FloatingMusicIcons 
           IconComponent={GiFlute}
-          iconCount={40}
-          minSize={30}
-          maxSize={250}
-          opacity={0.2}
+          iconCount={30}
+          minSize={20}
+          maxSize={150}
+          opacity={0.15}
         />
       </motion.div>
     </>
@@ -80,12 +76,10 @@ export function Imc() {
 
 export const LampContainer = ({ children, className }) => {
   return (
-    <div
-      className={cn(
-        "relative flex min-h-svh flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-slate-950 to-slate-900 w-full rounded-md z-0",
-        className
-      )}
-    >
+    <div className={cn(
+      "relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-slate-950 to-slate-900 w-full rounded-md z-0",
+      className
+    )}>
       <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0">
         <motion.div
           initial={{ opacity: 0.5, width: "15rem" }}
@@ -124,30 +118,6 @@ export const LampContainer = ({ children, className }) => {
         <div className="absolute top-1/2 h-48 w-full translate-y-12 scale-x-150 bg-slate-950 blur-2xl" />
         <div className="absolute top-1/2 z-50 h-48 w-full bg-transparent opacity-10 backdrop-blur-md" />
         <div className="absolute inset-auto z-50 h-36 w-[28rem] -translate-y-1/2 rounded-full bg-cyan-500 opacity-50 blur-3xl" />
-
-        <motion.div
-          initial={{ width: "8rem" }}
-          whileInView={{ width: "16rem" }}
-          transition={{
-            delay: 0.3,
-            duration: 0.8,
-            ease: "easeInOut",
-          }}
-          className="absolute inset-auto z-30 h-36 w-64 -translate-y-[6rem] rounded-full bg-cyan-400 blur-2xl"
-        />
-
-        <motion.div
-          initial={{ width: "15rem" }}
-          whileInView={{ width: "30rem" }}
-          transition={{
-            delay: 0.3,
-            duration: 0.8,
-            ease: "easeInOut",
-          }}
-          className="absolute inset-auto z-50 h-0.5 w-[30rem] -translate-y-[7rem] bg-cyan-400"
-        />
-
-        <div className="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-slate-950" />
       </div>
 
       <motion.div 
