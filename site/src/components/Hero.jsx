@@ -2,11 +2,10 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
 import { TiLocationArrow } from "react-icons/ti";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, Suspense } from "react";
 import { Link } from 'react-router-dom';
-
-import Button from "./Button";
 import VideoPreview from "./VideoPreview";
+import LoadingSpinner from "./LoadingSpinner";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,19 +15,34 @@ const Hero = () => {
 
   const [loading, setLoading] = useState(true);
   const [loadedVideos, setLoadedVideos] = useState(0);
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   const totalVideos = 4;
   const nextVdRef = useRef(null);
 
-  const handleVideoLoad = () => {
-    setLoadedVideos((prev) => prev + 1);
-  };
-
+  // Preload videos on mount
   useEffect(() => {
-    if (loadedVideos === totalVideos - 1) {
-      setLoading(false);
-    }
-  }, [loadedVideos]);
+    const videoUrls = Array.from({length: totalVideos}, (_, i) => getVideoSrc(i + 1));
+    let loadedCount = 0;
+
+    videoUrls.forEach(url => {
+      const video = document.createElement('video');
+      video.src = url;
+      video.preload = 'auto';
+      
+      video.onloadeddata = () => {
+        loadedCount++;
+        setLoadedVideos(loadedCount);
+        if (loadedCount === totalVideos) {
+          setLoading(false);
+        }
+      };
+    });
+  }, []);
+
+  const handleVideoLoad = () => {
+    setLoadedVideos(prev => prev + 1);
+  };
 
   const handleMiniVdClick = () => {
     setHasClicked(true);
@@ -83,47 +97,38 @@ const Hero = () => {
 
   const getVideoSrc = (index) => `videos/hero-${index}.mp4`;
 
-  useEffect(() => {
-    // Preload next video
-    const preloadVideo = new Image();
-    preloadVideo.src = getVideoSrc((currentIndex % totalVideos) + 1);
-  }, [currentIndex]);
-
   return (
     <div className="relative h-dvh w-screen overflow-x-hidden">
       {loading && (
         <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
-          {/* https://uiverse.io/G4b413l/tidy-walrus-92 */}
-          <div className="three-body">
-            <div className="three-body__dot"></div>
-            <div className="three-body__dot"></div>
-            <div className="three-body__dot"></div>
-          </div>
+          <LoadingSpinner />
         </div>
       )}
 
       <div
         id="video-frame"
-        className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75"
+        className={`relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75 ${loading ? 'invisible' : 'visible'}`}
       >
         <div>
           <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
-            <VideoPreview>
-              <div
-                onClick={handleMiniVdClick}
-                className="origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
-              >
-                <video
-                  ref={nextVdRef}
-                  src={getVideoSrc((currentIndex % totalVideos) + 1)}
-                  loop
-                  muted
-                  id="current-video"
-                  className="size-64 origin-center scale-150 object-cover object-center"
-                  onLoadedData={handleVideoLoad}
-                />
-              </div>
-            </VideoPreview>
+            <Suspense fallback={null}>
+              <VideoPreview>
+                <div
+                  onClick={handleMiniVdClick}
+                  className="origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
+                >
+                  <video
+                    ref={nextVdRef}
+                    src={getVideoSrc((currentIndex % totalVideos) + 1)}
+                    loop
+                    muted
+                    id="current-video"
+                    className="size-64 origin-center scale-150 object-cover object-center"
+                    onLoadedData={handleVideoLoad}
+                  />
+                </div>
+              </VideoPreview>
+            </Suspense>
           </div>
 
           <video
@@ -133,17 +138,17 @@ const Hero = () => {
             muted
             playsInline
             preload="auto"
-            className="absolute-center invisible absolute z-20 size-64 object-cover object-center"
+            className="absolute-center invisible absolute z-20 size-64 object-cover object-center video-container"
             onLoadedData={handleVideoLoad}
           />
           <video
-            src={getVideoSrc(
-              currentIndex === totalVideos - 1 ? 1 : currentIndex
-            )}
+            src={getVideoSrc(currentIndex === totalVideos - 1 ? 1 : currentIndex)}
             autoPlay
             loop
             muted
-            className="absolute left-0 top-0 size-full object-cover object-center"
+            playsInline
+            preload="auto"
+            className="absolute left-0 top-0 size-full object-cover object-center video-container"
             onLoadedData={handleVideoLoad}
           />
         </div>
@@ -180,6 +185,9 @@ const Hero = () => {
                 src="/img/circleimg.jpg" 
                 alt="sparkle background" 
                 className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
               />
               {/* Lighter overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-300/10 to-transparent"></div>
@@ -219,6 +227,9 @@ const Hero = () => {
                 src="/img/circleimg.jpg" 
                 alt="sparkle background" 
                 className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
               />
               {/* Lighter overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-300/10 to-transparent"></div>

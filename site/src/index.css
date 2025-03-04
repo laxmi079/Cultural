@@ -289,3 +289,43 @@ img {
   content-visibility: auto;
   contain-intrinsic-size: 700px;
 }
+
+/* Add these to your existing CSS */
+.video-container {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+}
+
+/* Optimize animations */
+.animated-element {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* Reduce paint operations */
+.hero-content {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+/* Optimize background images */
+.bg-image {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Add content-visibility for better performance */
+.story-section,
+.gallery-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 700px;
+}
+
+/* Optimize video performance */
+video {
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+}
