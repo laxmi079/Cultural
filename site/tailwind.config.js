@@ -31,7 +31,7 @@ export default {
         'reverse-spin': 'reverse-spin 12s linear infinite',
         'glow': 'glow 2s ease-in-out infinite',
         'sparkle': 'sparkle 4s ease-in-out infinite',
-        'rotate-slow': 'rotate 15s linear infinite',
+        'rotate-slow': 'rotate 20s linear infinite',
         'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'shimmer': 'shimmer 8s linear infinite',
         'cyber': 'cyber 10s linear infinite',
@@ -52,22 +52,12 @@ export default {
           },
         },
         glow: {
-          '0%, 100%': {
-            boxShadow: '0 0 10px var(--glow-color)',
-          },
-          '50%': {
-            boxShadow: '0 0 20px var(--glow-color)',
-          },
+          '0%, 100%': { opacity: 0.3 },
+          '50%': { opacity: 0.6 }
         },
-        'sparkle': {
-          '0%, 100%': {
-            transform: 'scale(1)',
-            opacity: 0.5,
-          },
-          '50%': {
-            transform: 'scale(1.2)',
-            opacity: 0.8,
-          }
+        sparkle: {
+          '0%, 100%': { opacity: 0.2 },
+          '50%': { opacity: 0.5 }
         },
         rotate: {
           '0%': { transform: 'rotate(0deg)' },
