@@ -83,6 +83,12 @@ const Hero = () => {
 
   const getVideoSrc = (index) => `videos/hero-${index}.mp4`;
 
+  useEffect(() => {
+    // Preload next video
+    const preloadVideo = new Image();
+    preloadVideo.src = getVideoSrc((currentIndex % totalVideos) + 1);
+  }, [currentIndex]);
+
   return (
     <div className="relative h-dvh w-screen overflow-x-hidden">
       {loading && (
@@ -125,7 +131,8 @@ const Hero = () => {
             src={getVideoSrc(currentIndex)}
             loop
             muted
-            id="next-video"
+            playsInline
+            preload="auto"
             className="absolute-center invisible absolute z-20 size-64 object-cover object-center"
             onLoadedData={handleVideoLoad}
           />

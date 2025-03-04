@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 import About from "./components/About";
-import Hero from "./components/Hero";
 import NavBar from "./components/Navbar";
 import Features from "./components/Features";
 import Story from "./components/Story";
@@ -18,7 +18,10 @@ import Aavran from "./components/clubs/aavran/aavran";
 import { Imc } from "./components/clubs/imc/Imc";
 import { Dfz } from "./components/clubs/dfz/dfz";
 import { Fac } from "./components/clubs/fac/fac";
+import LoadingSpinner from "./components/LoadingSpinner";
 
+// Lazy load only Hero component
+const Hero = lazy(() => import('./components/Hero'));
 
 function App() {
   return (
@@ -27,11 +30,11 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={
-            <>
+            <Suspense fallback={<LoadingSpinner />}>
               <Hero />
               <Features />
               <Story />
-            </>
+            </Suspense>
           } />
           <Route path="/about" element={<About />} />
           <Route path="/gallery" element={<GalleryApp />} />
